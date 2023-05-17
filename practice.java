@@ -1,70 +1,73 @@
 package mypackage;
 
+import java.util.*;
+import java.util.LinkedList;
+
 public class practice {
-    public static void Nqueens(char arr[][], int row){
-        // base case 
-        if(row == arr.length){
-            PrintBoard(arr);
-          return;
-        }
-        // recursion
-        for (int j = 0; j < arr.length; j++) {
-          if(isSafe(arr, row, j) == true){
-            arr[row][j] = 'Q';
-            Nqueens(arr, row+1);
-            arr[row][j] = 'X'; // backtracking
-          } 
-        }
-    }
+  static class Node {
+    int data;
+    Node next;
 
-
-    public static boolean isSafe(char arr[][], int row, int col){
-      // vertically up
-      for (int i = row-1; i >=0; i--) {
-        if (arr[i][col] == 'Q') {
-          return false;
-        }
-      }
-       
-      //left diagonal up
-      for (int i = row-1, j = col-1; i >=0 && j>=0; i--, j--) {
-        if (arr[i][j] == 'Q') {
-          return false;
-        }
-      }
-    
-      // right diagonal up
-      for (int i = row-1, j = col+1; i >=0 && j<arr.length; i--, j++) {
-        if (arr[i][j] == 'Q') {
-          return false;
-        }
-      }
-       
-       return true;
+    public Node(int data) {
+      this.data = data;
+      this.next = null;
     }
+  }
 
+  public static Node findMid(Node head) {
+    Node fast = head;
+    Node slow = head;
+    while (fast != null && fast.next != null) {
+      fast = fast.next.next;
+      slow = slow.next;
+    }
+    return slow;
+  }
 
-    public static void PrintBoard(char arr[][]){
-        System.out.println("........Board........");
-        for (int i = 0; i < arr.length; i++) {
-          for (int j = 0; j < arr.length; j++) {
-            System.out.print(arr[i][j]);
-          }
-          System.out.println();
-        }
-        
-  
-      }
-    public static void main(String[] args) {
-        // ** IMP N Queens
-    int n = 3;
-    char arr[][] = new char[n][n];
-    for (int i = 0; i < arr.length; i++) {
-      for (int j = 0; j < arr.length; j++) {
-        arr[i][j] = 'X';
-      }
+  public static boolean isPalindrome(Node head) {
+    if (head == null || head.next == null) {
+      return true;
     }
-   
-    Nqueens(arr, 0);
+    Node mid = findMid(head);
+
+    Node curr = mid;
+    Node next;
+    Node prev = null;
+
+    while (curr != null) {
+      next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
     }
+    Node temp1 = head;
+    Node temp2 = prev;
+
+    while (temp2 != null) {
+      if (temp2.data != temp1.data) {
+        return false;
+      }
+      temp1 = temp1.next;
+      temp2 = temp2.next;
+    }
+    return true;
+  }
+
+  public static void main(String[] args) {
+    // LinkedList <Integer> ll = new LinkedList<>();
+    // ll.add(0);
+    // ll.add(1);
+    // ll.add(2);
+    // ll.add(3);
+    // ll.add(4);
+    // System.out.print(ll);
+
+    Node head = new Node(0);
+    head.next = new Node(1);
+    head.next.next = new Node(1);
+    head.next.next.next = new Node(0);
+
+    System.out.print(isPalindrome(head));
+
+  }
 }
