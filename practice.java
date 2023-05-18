@@ -4,70 +4,67 @@ import java.util.*;
 import java.util.LinkedList;
 
 public class practice {
-  static class Node {
+  static class Node{
     int data;
-    Node next;
+    Node left;
+    Node right;
 
-    public Node(int data) {
+    public Node(int data){
       this.data = data;
-      this.next = null;
+      this.left = null;
+      this.right = null;
     }
   }
 
-  public static Node findMid(Node head) {
-    Node fast = head;
-    Node slow = head;
-    while (fast != null && fast.next != null) {
-      fast = fast.next.next;
-      slow = slow.next;
+  public static void levelOrder(Node root){
+
+
+    if(root == null){
+      return;
     }
-    return slow;
-  }
+    Queue <Node> q = new LinkedList<>();
 
-  public static boolean isPalindrome(Node head) {
-    if (head == null || head.next == null) {
-      return true;
-    }
-    Node mid = findMid(head);
+    q.add(root);
+    q.add(null);
 
-    Node curr = mid;
-    Node next;
-    Node prev = null;
-
-    while (curr != null) {
-      next = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = next;
-    }
-    Node temp1 = head;
-    Node temp2 = prev;
-
-    while (temp2 != null) {
-      if (temp2.data != temp1.data) {
-        return false;
+    while(!q.isEmpty()){
+      Node curr = q.remove();
+      if(curr == null){
+        System.out.println();
+        if(q.isEmpty()){
+          break;
+        }
+        else{
+          q.add(null);
+        }
       }
-      temp1 = temp1.next;
-      temp2 = temp2.next;
+      else{
+        System.out.print(curr.data);
+
+        if(curr.left != null){
+          q.add(curr.left);
+        }
+        if(curr.right != null){
+          q.add(curr.right);
+        }
+        
+      }
     }
-    return true;
+
+    
+
   }
+  public static void main(String args[]){
+    // level order traversing in the binary tree
+    Node root = new Node(1);
+    root.right = new Node(3);
+    root.left = new Node(2);
+    root.left.left  = new Node(4);
+    root.right.right = new Node(7);
+    root.left.right = new Node(5);
+    root.right.left  = new Node(6);
 
-  public static void main(String[] args) {
-    // LinkedList <Integer> ll = new LinkedList<>();
-    // ll.add(0);
-    // ll.add(1);
-    // ll.add(2);
-    // ll.add(3);
-    // ll.add(4);
-    // System.out.print(ll);
-
-    Node head = new Node(0);
-    head.next = new Node(1);
-    head.next.next = new Node(1);
-    head.next.next.next = new Node(0);
-
-    System.out.print(isPalindrome(head));
+    levelOrder(root);
 
   }
 }
