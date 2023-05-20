@@ -116,20 +116,20 @@ public class BinaryTreesB {
 
     }
 
-    public static int NumOfNodes(Node root){
-       // check if root is null
-       if(root == null){
-        return 0;
-       }
-       // recursively check for left and right of root
-       int ln = NumOfNodes(root.left);
-       int rn = NumOfNodes(root.right);
-       int totalNodes = ln + rn+1;
-       return totalNodes;
+    public static int NumOfNodes(Node root) {
+        // check if root is null
+        if (root == null) {
+            return 0;
+        }
+        // recursively check for left and right of root
+        int ln = NumOfNodes(root.left);
+        int rn = NumOfNodes(root.right);
+        int totalNodes = ln + rn + 1;
+        return totalNodes;
     }
 
-    public static int height(Node root){
-        if(root == null){
+    public static int height(Node root) {
+        if (root == null) {
             return 0;
         }
 
@@ -138,17 +138,16 @@ public class BinaryTreesB {
         return Math.max(lh, rh) + 1;
     }
 
-   
-    public static int sum(Node root){
-        if(root == null){
+    public static int sum(Node root) {
+        if (root == null) {
             return 0;
         }
-        int ls =  sum(root.left);
+        int ls = sum(root.left);
         int rs = sum(root.right);
-        int TotSum =  ls + rs + root.data;
+        int TotSum = ls + rs + root.data;
         return TotSum;
-    
-}
+
+    }
 
     public static void main(String args[]) {
         // int[] Nodes = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
@@ -164,21 +163,21 @@ public class BinaryTreesB {
         // LevelOrder(root);
 
         /*
-         *      1
-         *     / \
-         *     2  3
-         *    / \ / \
-         *    4 5 6 7
+         * 1
+         * / \
+         * 2 3
+         * / \ / \
+         * 4 5 6 7
          */
 
         Node root = new Node(1);
-        root.left = new Node(2); 
-        root.right = new Node(3); 
-        root.left.left = new Node(4); 
-        root.left.right = new Node(5); 
-        root.right.left = new Node(6); 
-        root.right.right = new Node(7); 
-        
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+
         System.out.print(NumOfNodes(root));
         System.out.println();
         System.out.print(height(root));

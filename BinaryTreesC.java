@@ -243,7 +243,7 @@ public class BinaryTreesC {
 
         // 2
         // /\
-        // 4 5
+        // 4 7
         Node root2 = new Node(2);
         root2.left = new Node(4);
         root2.right = new Node(5);
