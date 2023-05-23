@@ -1,4 +1,3 @@
-package mypackage;
 
 import java.util.*;
 import java.util.LinkedList;;
@@ -105,10 +104,10 @@ public class BinaryTreesB {
                 System.out.print(CurrentNode.data);
                 // check if current node. left ! = null then add node to the Queue
                 if (CurrentNode.left != null) {
-                    q.add(CurrentNode.left);
+                    q.add(root.left);
                 }
                 if (CurrentNode.right != null) {
-                    q.add(CurrentNode.right);
+                    q.add(root.right);
                 }
 
             }
