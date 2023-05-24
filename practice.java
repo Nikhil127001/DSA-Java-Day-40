@@ -181,7 +181,7 @@ public class practice {
     }
 
     int findMaxSum() {
-    return findMaxSum(root);
+      return findMaxSum(root);
     }
 
     int findMaxSum(Node node) {
@@ -191,145 +191,144 @@ public class practice {
       return res.val;
     }
   }
-  
 
-    public static void main(String[] args) {
-      // Question 1 :
-      // Check if a Binary Tree is univalued or not
-      // We have a binary tree, the task is to check if the binary tree is univalued
-      // or not. If found to be
-      // true, then print “YES”. Otherwise, print “NO”.
-      // Sample Input 1 :
-      // Sample Output 1 : false
+  public static void main(String[] args) {
+    // Question 1 :
+    // Check if a Binary Tree is univalued or not
+    // We have a binary tree, the task is to check if the binary tree is univalued
+    // or not. If found to be
+    // true, then print “YES”. Otherwise, print “NO”.
+    // Sample Input 1 :
+    // Sample Output 1 : false
 
-      // Sol ->
-      // Node root = new Node(1);
-      // root.left = new Node(1);
-      // root.right = new Node(1);
-      // root.left.left = new Node(1);
-      // root.left.right = new Node(1);
-      // root.right.right = new Node(1);
-      // root.right.left = new Node(1);
+    // Sol ->
+    // Node root = new Node(1);
+    // root.left = new Node(1);
+    // root.right = new Node(1);
+    // root.left.left = new Node(1);
+    // root.left.right = new Node(1);
+    // root.right.right = new Node(1);
+    // root.right.left = new Node(1);
 
-      // int x = root.data;
-      // System.out.print(CheckUnivalued(root, x));
+    // int x = root.data;
+    // System.out.print(CheckUnivalued(root, x));
 
-      // Question 2 :
-      // Invert Binary Tree
-      // Mirror of a Tree: Mirror of a Binary Tree T is another Binary Tree M(T) with
-      // left and right
-      // children of all non-leaf nodes interchanged.
-      // Input1 : fig. above
-      // Output1 : Yes
+    // Question 2 :
+    // Invert Binary Tree
+    // Mirror of a Tree: Mirror of a Binary Tree T is another Binary Tree M(T) with
+    // left and right
+    // children of all non-leaf nodes interchanged.
+    // Input1 : fig. above
+    // Output1 : Yes
 
-      // Sol ->
+    // Sol ->
 
-      // Node root = new Node(1);
-      // root.left = new Node(2);
-      // root.right = new Node(3);
-      // root.left.left = new Node(4);
-      // root.left.right = new Node(5);
-      // root.right.right = new Node(7);
-      // root.right.left = new Node(6);
+    // Node root = new Node(1);
+    // root.left = new Node(2);
+    // root.right = new Node(3);
+    // root.left.left = new Node(4);
+    // root.left.right = new Node(5);
+    // root.right.right = new Node(7);
+    // root.right.left = new Node(6);
 
-      // levelOrder(root);
+    // levelOrder(root);
 
-      // FindMirrorImage(root);
+    // FindMirrorImage(root);
 
-      // levelOrder(root);
+    // levelOrder(root);
 
-      //// check if two binary trees are mirror images of each other
+    //// check if two binary trees are mirror images of each other
 
-      // // Btree 1
-      // Node root = new Node(1);
-      // root.left = new Node(2);
-      // root.right = new Node(3);
-      // root.left.left = new Node(4);
-      // root.left.right = new Node(5);
-      // root.right.right = new Node(7);
-      // root.right.left = new Node(6);
+    // // Btree 1
+    // Node root = new Node(1);
+    // root.left = new Node(2);
+    // root.right = new Node(3);
+    // root.left.left = new Node(4);
+    // root.left.right = new Node(5);
+    // root.right.right = new Node(7);
+    // root.right.left = new Node(6);
 
-      // // Btree2
-      // Node root1 = new Node(1);
-      // root1.left = new Node(3);
-      // root1.right = new Node(2);
-      // root1.left.left = new Node(8);
-      // root1.left.right = new Node(6);
-      // root1.right.left = new Node(5);
-      // root1.right.right = new Node(4);
+    // // Btree2
+    // Node root1 = new Node(1);
+    // root1.left = new Node(3);
+    // root1.right = new Node(2);
+    // root1.left.left = new Node(8);
+    // root1.left.right = new Node(6);
+    // root1.right.left = new Node(5);
+    // root1.right.right = new Node(4);
 
-      // System.out.print(CheckMI(root,root1));
+    // System.out.print(CheckMI(root,root1));
 
-      // Question 3 :
-      // Delete leaf nodes with values as x
-      // We have a binary tree and a target integer x, delete all the leaf nodes
-      // having value as x. Also,
-      // delete the newly formed leaves with the target value as x.
-      // :
+    // Question 3 :
+    // Delete leaf nodes with values as x
+    // We have a binary tree and a target integer x, delete all the leaf nodes
+    // having value as x. Also,
+    // delete the newly formed leaves with the target value as x.
+    // :
 
-      // Node root1 = new Node(1);
-      // root1.left = new Node(3);
-      // root1.right = new Node(3);
-      // root1.left.left = new Node(3);
-      // root1.left.right = new Node(2);
+    // Node root1 = new Node(1);
+    // root1.left = new Node(3);
+    // root1.right = new Node(3);
+    // root1.left.left = new Node(3);
+    // root1.left.right = new Node(2);
 
-      // int n =3;
-      // removeLeafes(root1, n);
-      // levelOrder(root1);
+    // int n =3;
+    // removeLeafes(root1, n);
+    // levelOrder(root1);
 
-      // **IMP */ Question 4 :
-      // Find All Duplicate Subtrees
-      // We have a binary tree, find all duplicate subtrees. For each duplicate
-      // subtree, we only need to
-      // return the root node of any one of them. Two trees are duplicates if they
-      // have the same
-      // structure with the same node values.
-      // Input1:
-      // 1
-      // / \
-      // 4 3
-      // / / \
-      // 3 4 3
-      // /
-      // 3
-      // Output1: 4-3 , 3
+    // **IMP */ Question 4 :
+    // Find All Duplicate Subtrees
+    // We have a binary tree, find all duplicate subtrees. For each duplicate
+    // subtree, we only need to
+    // return the root node of any one of them. Two trees are duplicates if they
+    // have the same
+    // structure with the same node values.
+    // Input1:
+    // 1
+    // / \
+    // 4 3
+    // / / \
+    // 3 4 3
+    // /
+    // 3
+    // Output1: 4-3 , 3
 
-      // Node root = null;
-      // root = new Node(1);
-      // root.left = new Node(4);
-      // root.right = new Node(3);
-      // root.left.left = new Node(3);
-      // root.right.left = new Node(4);
-      // root.right.left.left = new Node(3);
-      // root.right.right = new Node(3);
-      // printAllDups(root);
+    // Node root = null;
+    // root = new Node(1);
+    // root.left = new Node(4);
+    // root.right = new Node(3);
+    // root.left.left = new Node(3);
+    // root.right.left = new Node(4);
+    // root.right.left.left = new Node(3);
+    // root.right.right = new Node(3);
+    // printAllDups(root);
 
-      // Question 5 :
-      // Maximum Path Sum in a Binary Tree
-      // We have a binary tree, find the maximum path sum. The path may start and end
-      // at any node in
-      // the tree.
-      // Input1:
-      // kumarnikhil2111@gmail.com
-      // 4
-      // / \
-      // 2 7
-      // Output1: 13
-      // Input2:
-      // ;
-      // Output2: 42
+    // Question 5 :
+    // Maximum Path Sum in a Binary Tree
+    // We have a binary tree, find the maximum path sum. The path may start and end
+    // at any node in
+    // the tree.
+    // Input1:
+    // kumarnikhil2111@gmail.com
+    // 4
+    // / \
+    // 2 7
+    // Output1: 13
+    // Input2:
+    // ;
+    // Output2: 42
 
-      Solution tree = new Solution();
-      tree.root = new Node(10);
-      tree.root.left = new Node(2);
-      tree.root.right = new Node(10);
-      tree.root.left.left = new Node(20);
-      tree.root.left.right = new Node(1);
-      tree.root.right.right = new Node(-25);
-      tree.root.right.right.left = new Node(3);
-      tree.root.right.right.right = new Node(4);
-      System.out.println("maximum path sum is : " +
-          tree.findMaxSum());
+    Solution tree = new Solution();
+    tree.root = new Node(10);
+    tree.root.left = new Node(2);
+    tree.root.right = new Node(10);
+    tree.root.left.left = new Node(20);
+    tree.root.left.right = new Node(1);
+    tree.root.right.right = new Node(-25);
+    tree.root.right.right.left = new Node(3);
+    tree.root.right.right.right = new Node(4);
+    System.out.println("maximum path sum is : " +
+        tree.findMaxSum());
 
-    }
+  }
 }

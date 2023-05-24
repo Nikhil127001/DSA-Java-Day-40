@@ -104,10 +104,10 @@ public class BinaryTreesB {
                 System.out.print(CurrentNode.data);
                 // check if current node. left ! = null then add node to the Queue
                 if (CurrentNode.left != null) {
-                    q.add(root.left);
+                    q.add(CurrentNode.left);
                 }
                 if (CurrentNode.right != null) {
-                    q.add(root.right);
+                    q.add(CurrentNode.right);
                 }
 
             }
