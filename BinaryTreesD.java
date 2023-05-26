@@ -204,6 +204,7 @@ public class BinaryTreesD {
         // return sum as Temp + left + right
         return Temp + root.data;
     }
+
     public static void LevelOrder(Node root) {
         // if tree is empty then return
         if (root == null) {
@@ -246,15 +247,40 @@ public class BinaryTreesD {
 
     }
 
+    public static void CreateArray(Node root, ArrayList<Integer> a) {
+
+        if (root == null) {
+            return;
+        }
+
+        CreateArray(root.left, a);
+        a.add(root.data);
+        CreateArray(root.right, a);
+
+    }
+
+    public static int findrangeSum(Node root, int a, int b, int sum) {
+        ArrayList<Integer> d = new ArrayList<>();
+        CreateArray(root, d);
+
+        for (int i = 0; i < d.size() - 1; i++) {
+            if (d.get(i) > a && d.get(i) < b) {
+                sum += d.get(i);
+            }
+        }
+
+        return sum;
+    }
+
     public static void main(String[] args) {
 
-        Node root = new Node(1);
-        root.left = new Node(2);
-        root.right = new Node(3);
-        root.left.left = new Node(4);
-        root.left.right = new Node(5);
-        root.right.left = new Node(6);
-        root.right.right = new Node(7);
+        // Node root = new Node(1);
+        // root.left = new Node(2);
+        // root.right = new Node(3);
+        // root.left.left = new Node(4);
+        // root.left.right = new Node(5);
+        // root.right.left = new Node(6);
+        // root.right.right = new Node(7);
         // root.right.right.right = new Node(8);
         // root.right.right.left = new Node(11);
         // root.left.left.left = new Node(9);
@@ -267,14 +293,44 @@ public class BinaryTreesD {
         // int b = 7;
         // LowestCommonAnsistor(root, 6, 7);
         // minimum distance between two nodes
-        int a = 6;
-        int b = 5;
+        // int a = 6;
+        // int b = 5;
 
         // FindMinDistance(root, a, b);
 
-        SumOfNodes(root);
-        LevelOrder(root);
+        // SumOfNodes(root);
+        // LevelOrder(root);
 
+        // Binary Search trees practice Questions
+
+        // Question 1 :
+        // Range Sum of BST
+        // We have a Binary Search Tree consisting of N nodes and two positive integers
+        // L and R, the
+        // task is to find the sum of values of all the nodes that lie in the range [L,
+        // R]..
+        // Sample Input1::
+        // 8
+        // / \
+        // 5 11
+        // / \ \
+        // 3 6 20
+        // Sample Output1 : 11
+
+        // Solution
+        // Time Complexity : o(n)
+        // Space Complexity: o(n)
+
+        Node root = new Node(8);
+        root.left = new Node(5);
+        root.right = new Node(11);
+        root.left.left = new Node(3);
+        root.left.right = new Node(6);
+        root.right.right = new Node(20);
+        int a = 2;
+        int b = 20;
+        int sum = 0;
+        System.out.print("the sum in the range is : " + findrangeSum(root, a, b, sum));
     }
 
 }

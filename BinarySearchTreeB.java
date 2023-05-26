@@ -119,6 +119,49 @@ public class BinarySearchTreeB {
 
     }
 
+    public static void MergeArray(ArrayList <Integer> a, int Array1[], int Array2[]){
+        int i=0;
+        int j = 0;
+
+        while(i < Array1.length && j < Array2.length){
+            if(Array1[i] <= Array2[j]){
+                a.add(Array1[i]);
+                i++;
+            }
+            else{
+                a.add(Array2[j]);
+                j++;
+            }
+        }
+        // for left over elements in the arrays
+
+        while(i < Array1.length){
+            a.add(Array1[i]);
+                i++;
+        }
+        while(j < Array2.length){
+            a.add(Array2[j]);
+                j++;
+        }
+
+    }
+
+
+    public static Node CreateBalancedBST2(ArrayList <Integer> a , int si, int ei){
+
+        if(si> ei){
+            return null;
+        }
+        // find mid 
+        int mid = (si+ei)/2;
+        // store value of root in Node variable
+        Node root = new Node(a.get(mid));
+        // mAKE CALL FOR LEFT pART and store value in  the root ki left Node
+        root.left = CreateBalancedBST2(a, si, mid -1);
+        root.right = CreateBalancedBST2(a, mid+1, ei);
+        return root;
+    }
+
     public static void main(String[] args) {
         // // Sorted array to balanced Binary search tree
         // int Arr[] = { 3, 5, 6, 8, 10, 12, 11 };
@@ -176,6 +219,18 @@ public class BinarySearchTreeB {
 
         // LargestSubtree(root);
         // System.out.print(MaxSizeVal);
+
+        // merge two BST
+        int BST1[] ={1,2,4};
+        int BST2[] ={3,9,12};
+        // Combine these Sorted Arrays to form new Array
+        ArrayList <Integer> a  = new ArrayList<>();
+        MergeArray(a,BST1,BST2);
+        // this function will return final root Node
+        Node root = CreateBalancedBST2(a, 0, a.size()-1);
+        inOrder(root);
+          
+        
 
     }
 }
