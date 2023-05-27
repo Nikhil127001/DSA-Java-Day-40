@@ -220,15 +220,15 @@ public class BinarySearchTreeB {
         // LargestSubtree(root);
         // System.out.print(MaxSizeVal);
 
-        // merge two BST
-        int BST1[] ={1,2,4};
-        int BST2[] ={3,9,12};
-        // Combine these Sorted Arrays to form new Array
-        ArrayList <Integer> a  = new ArrayList<>();
-        MergeArray(a,BST1,BST2);
-        // this function will return final root Node
-        Node root = CreateBalancedBST2(a, 0, a.size()-1);
-        inOrder(root);
+        // // merge two BST
+        // int BST1[] ={1,2,4};
+        // int BST2[] ={3,9,12};
+        // // Combine these Sorted Arrays to form new Array
+        // ArrayList <Integer> a  = new ArrayList<>();
+        // MergeArray(a,BST1,BST2);
+        // // this function will return final root Node
+        // Node root = CreateBalancedBST2(a, 0, a.size()-1);
+        // inOrder(root);
           
         
 
