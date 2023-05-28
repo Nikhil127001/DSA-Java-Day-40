@@ -60,7 +60,22 @@ public class Hashing {
         return false;
 
     }
+    public static String findStart(HashMap<String, String> fromto){
+        HashMap <String, String> tofrom = new HashMap<>();
 
+        for(String key : fromto.keySet()){
+            tofrom.put(fromto.get(key), key);
+        }
+
+        String start = "";
+        Set<String> st = fromto.keySet();
+        for(String s : st){
+            if(!tofrom.containsKey(s)){
+                start = s;
+            }
+        }
+        return start;
+    }
     public static void main(String[] args) {
         // // hashmap implementation
         // HashMap <String,Integer> hm = new HashMap<>();
@@ -96,5 +111,69 @@ public class Hashing {
         // String str1 = "nonu";
         // String str2 = "nunh";
         // System.out.print(ValidAnagram(str1, str2));
+
+
+
+        //**** */ Hashset
+
+
+        // // union and intersaction in HashSet
+
+        // int arr1[] = {7,3,9};
+        // int arr2[] = {6,3,9,2,9,4};
+        // HashSet <Integer> h = new HashSet<>();
+
+        // // to calculate union put all the elements of both the arrays in the Hashset then find the size of the Hashset
+
+        // int j =0; int i =0;
+        // while (i != arr1.length ){
+        //     h.add(arr1[i]);
+        //     i++;
+        // }
+        // while(j != arr2.length){
+        //     h.add(arr2[j]);
+        //     j++;
+        // }
+
+        // System.out.println("the union count is " + h.size());
+        // h.clear();
+        // i = 0;
+        // // to calculate intersection 
+
+        // // first put all the elements of arr1 in  hashset
+        // while (i != arr1.length ){
+        //     h.add(arr1[i]);
+        //     i++;
+        // }
+
+        // // now check that is if the elements in the hashset are same as the elemnts in arr2
+        // // if true the increase count by 1
+        // int count  = 0;
+
+        // for(int y =0; y<arr2.length; y++){
+        //     if(h.contains(arr2[y])){
+        //         count = count+ 1;
+        //         System.out.print(arr2[y]);
+        //     }
+        //        h.remove(arr2[y]);
+            
+        // }
+        // System.out.print("the intersection count is "+ count );     
+        
+        // travel itenary problem
+        HashMap <String, String> fromto = new HashMap<>();
+
+        fromto.put("Chennai", "Bengaluru");
+        fromto.put("Mumbai", "Delhi");
+        fromto.put("Goa", "Chennai");
+        fromto.put("Delhi", "Goa");
+
+        String Start = findStart(fromto);
+        // here we got start -> Mumbai
+        System.out.print(Start );
+        while(fromto.containsKey(Start)){
+            System.out.print( "->"+fromto.get(Start));
+            Start = fromto.get(Start);
+        }
     }
 }
