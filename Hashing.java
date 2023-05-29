@@ -160,20 +160,51 @@ public class Hashing {
         // }
         // System.out.print("the intersection count is "+ count );     
         
-        // travel itenary problem
-        HashMap <String, String> fromto = new HashMap<>();
+        // // travel itenary problem
+        // HashMap <String, String> fromto = new HashMap<>();
 
-        fromto.put("Chennai", "Bengaluru");
-        fromto.put("Mumbai", "Delhi");
-        fromto.put("Goa", "Chennai");
-        fromto.put("Delhi", "Goa");
+        // fromto.put("Chennai", "Bengaluru");
+        // fromto.put("Mumbai", "Delhi");
+        // fromto.put("Goa", "Chennai");
+        // fromto.put("Delhi", "Goa");
 
-        String Start = findStart(fromto);
-        // here we got start -> Mumbai
-        System.out.print(Start );
-        while(fromto.containsKey(Start)){
-            System.out.print( "->"+fromto.get(Start));
-            Start = fromto.get(Start);
+        // String Start = findStart(fromto);
+        // // here we got start -> Mumbai
+        // System.out.print(Start );
+        // while(fromto.containsKey(Start)){
+        //     System.out.print( "->"+fromto.get(Start));
+        //     Start = fromto.get(Start);
+        // }
+
+        // //** IMP */ Largest SubArray with sum zero
+        // HashMap <Integer, Integer> h = new HashMap<>();
+        // int arr[] = {15,-2,2,-8,1,7,10} ;
+        // int length = 0;
+        // int sum = 0;
+        // for(int j =0; j< arr.length; j++){
+        //     sum += arr[j];
+        //     if(h.containsKey(sum)){
+        //         length = (j-h.get(sum)); 
+        //     }else{
+        //         h.put(sum,j);
+        //     }
+        // }
+        // System.out.print(length);
+                                                             
+        // //** IMP */ SubArray sum equal to k.
+        HashMap <Integer, Integer> h = new HashMap<>();
+        int arr[] = {10,2,-2,-20,10} ;
+        int count = 0;
+        int sum = 0;
+        int k = -10;
+        h.put(0,1);
+        for(int j =0; j< arr.length; j++){
+            sum += arr[j]; // sum of j elements in an array
+            if(h.containsKey(sum-k)){
+                 count += h.get(sum-k);
+            }
+                h.put(sum,h.getOrDefault(sum,0)+1);
         }
+        System.out.print(count);
     }
 }
