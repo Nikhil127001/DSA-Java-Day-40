@@ -93,7 +93,6 @@
 
 
 // bottom view of the binary tree
-package mypackage;
 import java.util.*;
 import java.util.LinkedList;
 
