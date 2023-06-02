@@ -6,12 +6,12 @@ public class Graphs {
     static class Edge {
         int start;
         int dest;
-        int weight;
+        // int weight;
 
-        public Edge(int start, int dest, int weight) {
+        public Edge(int start, int dest) {
             this.start = start;
             this.dest = dest;
-            this.weight = weight;
+            // this.weight = weight;
         }
     }
 
@@ -214,10 +214,75 @@ public class Graphs {
         }
         return true;
     }
+    // checking cycle in a directed graph using DFS
+    public static boolean IsCycleExists(ArrayList<Edge> graph[]){
+
+        boolean visited[] = new boolean[graph.length];
+        boolean stack[] = new boolean[graph.length];
+
+        for(int i =0; i< graph.length;i++){
+            if(!visited[i]){
+                if(IsCycleExistsUtils(graph,i,visited,stack)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean IsCycleExistsUtils(ArrayList<Edge> graph[],int j, boolean visited[], boolean stack[]){
+
+        int curr = j;
+        // change visited of current to true
+        visited[curr] = true;
+        // change stack of the current to true
+        stack[curr] = true;
+        // now check for its neighbours
+        for(int i = 0; i<graph[curr].size();i++ ){
+            Edge e = graph[curr].get(i);
+            // check if the element is already in the stack
+            if(stack[e.dest] ){
+                return true;
+            }
+            if(!visited[e.dest] && IsCycleExistsUtils(graph,e.dest,visited,stack)){
+                return true;
+            }
+        }
+        stack[curr] = false;
+        return false;
+    }
+
+    public static void topologicalSort(ArrayList<Edge> graph[]){
+        boolean visited[] = new boolean[graph.length];
+        Stack <Integer> st = new Stack<>();
+
+        for(int i = 0;i<graph.length;i++){
+            if(!visited[i]){
+                topologicalSortutil(graph,i, visited,st);
+            }
+        }
+        while(!st.isEmpty()){
+            System.out.print(st.pop());
+        }
+    }
+
+    public static void topologicalSortutil(ArrayList<Edge> graph[],int j, boolean visited[], Stack<Integer> st){
+        int curr = j;
+
+        visited[curr] = true;
+
+        for(int i = 0; i< graph[curr].size(); i++){
+            Edge e = graph[curr].get(i);
+            if(!visited[e.dest]){
+                topologicalSortutil(graph,e.dest,visited,st);
+            }
+        }
+        st.add(curr);
+    }
 
     public static void main(String args[]) {
         // creating graph structur using Adjencency list
-        int size = 5;
+        int size = 6;
         @SuppressWarnings("unchecked")
         ArrayList<Edge>[] Graph = new ArrayList[size];
 
@@ -270,18 +335,33 @@ public class Graphs {
         //// ** find cycle in a graph
         // System.out.print(CycleExists(Graph));
 
-        // ** IMP */ check if bipartite or not
-        Graph[0].add(new Edge(0, 1, 1));
-        Graph[0].add(new Edge(0, 2, 1));
-        Graph[1].add(new Edge(1, 0, 1));
-        Graph[1].add(new Edge(1, 3, 1));
-        Graph[2].add(new Edge(2, 0, 1));
-        Graph[2].add(new Edge(2, 4, 1));
-        Graph[3].add(new Edge(3, 1, 1));
-        // Graph[3].add(new Edge(3, 4, 1));
-        Graph[4].add(new Edge(4, 2, 1));
-        // Graph[4].add(new Edge(4, 3, 1));
-        System.out.print(CheckBipartite(Graph));
+        // // ** IMP */ check if bipartite or not
+        // Graph[0].add(new Edge(0, 1, 1));
+        // Graph[0].add(new Edge(0, 2, 1));
+        // Graph[1].add(new Edge(1, 0, 1));
+        // Graph[1].add(new Edge(1, 3, 1));
+        // Graph[2].add(new Edge(2, 0, 1));
+        // Graph[2].add(new Edge(2, 4, 1));
+        // Graph[3].add(new Edge(3, 1, 1));
+        // // Graph[3].add(new Edge(3, 4, 1));
+        // Graph[4].add(new Edge(4, 2, 1));
+        // // Graph[4].add(new Edge(4, 3, 1));
+        // System.out.print(CheckBipartite(Graph));
 
+        // //** IMP */ cycle detection in directed graphs // cycle exists
+        // Graph[0].add(new Edge(0, 2));
+        // Graph[1].add(new Edge(1, 0));
+        // Graph[2].add(new Edge(2, 3));
+        // Graph[3].add(new Edge(3, 0));
+        // // System.out.print(IsCycleExists(Graph));
+
+        // ** IMP topological Sort in Graphs(DAG - Directed Acyclic graphs)
+        Graph[2].add(new Edge(2, 3));
+        Graph[3].add(new Edge(3, 1));
+        Graph[4].add(new Edge(4, 0));
+        Graph[4].add(new Edge(4, 1));
+        Graph[5].add(new Edge(5, 0));
+        Graph[5].add(new Edge(5, 2));
+        topologicalSort(Graph);
     }
 }
