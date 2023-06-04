@@ -214,15 +214,16 @@ public class Graphs {
         }
         return true;
     }
+
     // checking cycle in a directed graph using DFS
-    public static boolean IsCycleExists(ArrayList<Edge> graph[]){
+    public static boolean IsCycleExists(ArrayList<Edge> graph[]) {
 
         boolean visited[] = new boolean[graph.length];
         boolean stack[] = new boolean[graph.length];
 
-        for(int i =0; i< graph.length;i++){
-            if(!visited[i]){
-                if(IsCycleExistsUtils(graph,i,visited,stack)){
+        for (int i = 0; i < graph.length; i++) {
+            if (!visited[i]) {
+                if (IsCycleExistsUtils(graph, i, visited, stack)) {
                     return true;
                 }
             }
@@ -230,7 +231,7 @@ public class Graphs {
         return false;
     }
 
-    public static boolean IsCycleExistsUtils(ArrayList<Edge> graph[],int j, boolean visited[], boolean stack[]){
+    public static boolean IsCycleExistsUtils(ArrayList<Edge> graph[], int j, boolean visited[], boolean stack[]) {
 
         int curr = j;
         // change visited of current to true
@@ -238,13 +239,13 @@ public class Graphs {
         // change stack of the current to true
         stack[curr] = true;
         // now check for its neighbours
-        for(int i = 0; i<graph[curr].size();i++ ){
+        for (int i = 0; i < graph[curr].size(); i++) {
             Edge e = graph[curr].get(i);
             // check if the element is already in the stack
-            if(stack[e.dest] ){
+            if (stack[e.dest]) {
                 return true;
             }
-            if(!visited[e.dest] && IsCycleExistsUtils(graph,e.dest,visited,stack)){
+            if (!visited[e.dest] && IsCycleExistsUtils(graph, e.dest, visited, stack)) {
                 return true;
             }
         }
@@ -252,32 +253,71 @@ public class Graphs {
         return false;
     }
 
-    public static void topologicalSort(ArrayList<Edge> graph[]){
+    public static void topologicalSort(ArrayList<Edge> graph[]) {
         boolean visited[] = new boolean[graph.length];
-        Stack <Integer> st = new Stack<>();
+        Stack<Integer> st = new Stack<>();
 
-        for(int i = 0;i<graph.length;i++){
-            if(!visited[i]){
-                topologicalSortutil(graph,i, visited,st);
+        for (int i = 0; i < graph.length; i++) {
+            if (!visited[i]) {
+                topologicalSortutil(graph, i, visited, st);
             }
         }
-        while(!st.isEmpty()){
+        while (!st.isEmpty()) {
             System.out.print(st.pop());
         }
     }
 
-    public static void topologicalSortutil(ArrayList<Edge> graph[],int j, boolean visited[], Stack<Integer> st){
+    public static void topologicalSortutil(ArrayList<Edge> graph[], int j, boolean visited[], Stack<Integer> st) {
         int curr = j;
 
         visited[curr] = true;
 
-        for(int i = 0; i< graph[curr].size(); i++){
+        for (int i = 0; i < graph[curr].size(); i++) {
             Edge e = graph[curr].get(i);
-            if(!visited[e.dest]){
-                topologicalSortutil(graph,e.dest,visited,st);
+            if (!visited[e.dest]) {
+                topologicalSortutil(graph, e.dest, visited, st);
             }
         }
         st.add(curr);
+    }
+
+    public static void findInDegree(ArrayList<Edge> graph[], int inDegree[]) {
+        // calcukate indegree array
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[i].size(); j++) {
+                Edge e = graph[i].get(j);
+                inDegree[e.dest]++;
+            }
+        }
+    }
+
+    public static void topologicalSortBFS(ArrayList<Edge> graph[], int inDegree[]) {
+        // make Queue
+        Queue<Integer> q = new LinkedList<>();
+
+        // adding elements in the queue whose inDegree is Zero such that they are the
+        // starting nodes of topological sort
+        for (int i = 0; i < inDegree.length; i++) {
+            if (inDegree[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        while (!q.isEmpty()) {
+            int curr = q.remove();
+            System.out.print(curr);
+            // check for its neighbour
+            for (int j = 0; j < graph[curr].size(); j++) {
+                // find edge
+                Edge e = graph[curr].get(j);
+                // decrese the indegree of the neighbours by 1
+                inDegree[e.dest]--;
+                // check if the neighbour indegree is zero then at it in the Queue
+                if (inDegree[e.dest] == 0) {
+                    q.add(e.dest);
+                }
+            }
+        }
     }
 
     public static void main(String args[]) {
@@ -355,13 +395,101 @@ public class Graphs {
         // Graph[3].add(new Edge(3, 0));
         // // System.out.print(IsCycleExists(Graph));
 
-        // ** IMP topological Sort in Graphs(DAG - Directed Acyclic graphs)
+        // // ** IMP topological Sort in Graphs(DAG - Directed Acyclic graphs)
         Graph[2].add(new Edge(2, 3));
         Graph[3].add(new Edge(3, 1));
         Graph[4].add(new Edge(4, 0));
         Graph[4].add(new Edge(4, 1));
         Graph[5].add(new Edge(5, 0));
         Graph[5].add(new Edge(5, 2));
-        topologicalSort(Graph);
+        // topologicalSort(Graph);
+
+        // topological sort using BFS
+        int inDegree[] = new int[Graph.length];
+        findInDegree(Graph, inDegree);
+        topologicalSortBFS(Graph, inDegree);
+
+        // Q.) **Imp on kahn's algorithm
+        // There are a total of numCourses courses you have to take, labeled from 0 to
+        // numCourses - 1. You are given an array prerequisites where prerequisites[i] =
+        // [ai, bi] indicates that you must take course bi first if you want to take
+        // course ai.
+
+        // For example, the pair [0, 1], indicates that to take course 0 you have to
+        // first take course 1.
+        // Return the ordering of courses you should take to finish all courses. If
+        // there are many valid answers, return any of them. If it is impossible to
+        // finish all courses, return an empty array.
+
+        // Example 1:
+
+        // Input: numCourses = 2, prerequisites = [[1,0]]
+        // Output: [0,1]
+        // Explanation: There are a total of 2 courses to take. To take course 1 you
+        // should have finished course 0. So the correct course order is [0,1].
+        // Example 2:
+
+        // Input: numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]
+        // Output: [0,2,1,3]
+        // Explanation: There are a total of 4 courses to take. To take course 3 you
+        // should have finished both courses 1 and 2. Both courses 1 and 2 should be
+        // taken after you finished course 0.
+        // So one correct course order is [0,1,2,3]. Another correct ordering is
+        // [0,2,1,3].
+        // Example 3:
+
+        // Input: numCourses = 1, prerequisites = []
+        // Output: [0]
+
+        // Sol - >
+        // import java.util.*;
+        // class Solution {
+        // public int[] findOrder(int numCourses, int[][] prereq) {
+        // // initialising graph of arrayList
+        // ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+
+        // for(int p = 0 ; p<numCourses ; p++){
+        // graph.add(new ArrayList<>());
+        // }
+
+        // int inDegree[] = new int[numCourses];
+        // // first find indegree for each course
+        // for(int i = 0 ; i<prereq.length;i++){
+        // graph.get(prereq[i][1]).add(prereq[i][0]);
+        // inDegree[prereq[i][0]]++;
+        // }
+
+        // //initialising Queue
+        // Queue <Integer> q = new LinkedList<>();
+
+        // // add elements with inDegree zero to the Queue
+
+        // for(int j = 0; j<inDegree.length;j++){
+        // if(inDegree[j] == 0){
+        // q.add(j);
+        // }
+        // }
+
+        // // initializing resuolt array
+        // int arr[] = new int[numCourses];
+        // int k = 0;
+        // while(!q.isEmpty()){
+        // int curr = q.remove();
+        // arr[k] = curr;
+        // k++;
+        // // find the neighbours of the curr elem
+        // for(int x : graph.get(curr)){
+        // inDegree[x]--;
+        // if(inDegree[x] == 0){
+        // q.add(x);
+        // }
+        // }
+
+        // }
+        // if(k!=numCourses) return new int[0];
+        // return arr;
+
+        // }
+        // }
     }
 }
