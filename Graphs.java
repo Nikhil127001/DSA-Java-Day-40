@@ -142,7 +142,7 @@ public class Graphs {
 
     // ..................................................................................
 
-    // finding cycle in the graph using BFS
+    // finding cycle in the graph using DFS
     public static boolean CycleExists(ArrayList<Edge> graph[]) {
         boolean visited[] = new boolean[graph.length];
         for (int i = 0; i < graph.length; i++) {
