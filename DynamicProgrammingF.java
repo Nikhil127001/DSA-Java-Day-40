@@ -25,7 +25,6 @@ public class DynamicProgrammingF {
     }
 
     public static void main(String[] args) {
-        // Matrix chain multiplication 
         int arr[] = { 1, 2, 3, 4, 3 };
         int n = arr.length;
         System.out.print(MatrixChainMulR(arr, 1, n-1));
