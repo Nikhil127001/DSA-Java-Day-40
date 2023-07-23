@@ -97,7 +97,7 @@ public class DynamicProgrammingF {
         }
         System.out.println(MatrixChainMulM(arr, 1, n - 1, dp));
 
-        // Matrix chain multiplication using Tabulation
+        //// Matrix chain multiplication using Tabulation
 
         System.out.println(MatrixChainMulT(arr));
 
